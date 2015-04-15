@@ -34,7 +34,8 @@ class dt_column(Item):
 @grok.subscribe(dt_column, IObjectAddedEvent)
 def moveObj(column, event):
     container = column.aq_parent
-    api.content.move(
-        source=column,
-        target=container['dtcolumns'],
-        safe_id=True)
+    if 'dtcolumns' in container.keys():
+        api.content.move(
+            source=column,
+            target=container['dtcolumns'],
+            safe_id=True)
